@@ -1,0 +1,40 @@
+- name: "Implmeneting Data Model using ansible on Netbox"
+  connection: local
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Create site within NetBox with only required information
+      netbox.netbox.netbox_site:
+        netbox_url: http://localhost:8000/
+        netbox_token: ''
+        data:
+          name: Test - Colorado
+        state: present
+    
+    - name: Create manufacturer within NetBox with only required information
+      netbox.netbox.netbox_manufacturer:
+        netbox_url: http://localhost:8000/
+        netbox_token: ''
+        data:
+          name: Test Manufacturer
+        state: present
+    
+    - name: Create device type within NetBox with only required information
+      netbox.netbox.netbox_device_type:
+        netbox_url: http://localhost:8000/
+        netbox_token: ''
+        data:
+          slug: test-device-type
+          model: ws-test-3750
+          manufacturer: Test Manufacturer
+        state: present
+  
+    - name: Create device role within NetBox with only required information
+      netbox.netbox.netbox_device_role:
+        netbox_url: http://localhost:8000/
+        netbox_token: ''
+        data:
+          name: Test device role
+          color: FFFFFF
+        state: present
+  
